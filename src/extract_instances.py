@@ -10,8 +10,8 @@ import feature_extractor
 parser = feature_extractor.parser
 
 # Use one of those two parameters to specify the inputs
-parser.add_argument("--input_dir", help="Directory with input text files")
-parser.add_argument("--input_file", help="Filename with input text file")
+parser.add_argument("--input_dir", help="Directory with input text files (output of parse_turbo_output.py)")
+parser.add_argument("--input_file", help="Filename with input text file (output of parse_turbo_output.py)")
 
 parser.add_argument("--features_filename", required=True,
     help="Output file with features in creg format")

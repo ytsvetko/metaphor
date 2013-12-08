@@ -56,8 +56,9 @@ class TurboSentence:
 
   def Write(self, rel_type, sub, verb, obj=None):
     full_sentence = u" ".join([w.surface_form for w in self.words])
-    self.out_file.write(u"{}\t{}\t{}\t{}\t{}\t{}\n".format(
-        self.num_sentence, rel_type, sub, verb, obj, full_sentence))
+    instance_num = -1
+    self.out_file.write(u"{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(
+        self.num_sentence, rel_type, instance_num, sub, verb, obj, full_sentence))
 
   def SaveSVO(self):
     sub_rel, obj_rel = self.GetSVO()

@@ -21,8 +21,6 @@ CONCRETE_LEX_IDS = set(["noun.animal", "noun.artifact", "noun.body","noun.locati
 
 class WordNetSupersenseFeatureExtractor(feature_extractor.FeatureExtractor):
   def __init__(self, translation_dict=None):
-    self.wordnet_parser = wordnet_parser.WordNetParser(
-        data_file_name=wordnet_data_file)
     self.translation_dict = translation_dict
 
   def _GetSupersensesByWord(self, word, ss_type):    
@@ -47,7 +45,7 @@ class WordNetSupersenseFeatureExtractor(feature_extractor.FeatureExtractor):
   def ExtractFeaturesFromInstance(
       self, filename, line_num, line, rel_type, sub, verb, obj):
     feature_dict = {}
-    if rel_type = 'svo':
+    if rel_type == 'svo':
       if not sub.is_none:
         feature_dict.update(self._WordToFeature(sub.lemma, "SUB", wn.NOUN))
       if not verb.is_none:
@@ -61,7 +59,7 @@ if __name__ == '__main__':
   print "This module is a library, not supposed to be executed directly."
   sys.exit(1)
 
-def REGISTER_FEATURE_EXTRACTOR(args, traslation_dict=None):
+def REGISTER_FEATURE_EXTRACTOR(args, translation_dict=None):
   if not args.append_wn_supersenses:
     return None
   return WordNetSupersenseFeatureExtractor(translation_dict)
