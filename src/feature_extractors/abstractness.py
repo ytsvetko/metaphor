@@ -68,23 +68,23 @@ class AbstractnessFeatureExtractor(feature_extractor.FeatureExtractor):
     sub_dict, sub_label = {}, "?"
     obj_dict, obj_label = {}, "?"
     if not verb.is_none:
-      verb_dict, verb_label = self._MakeFeatures(verb.word, "VERB")
+      verb_dict, verb_label = self._MakeFeatures(verb.lemma, "VERB")
     if not sub.is_none:
-      sub_dict, sub_label = self._MakeFeatures(sub.word, "SUB")
+      sub_dict, sub_label = self._MakeFeatures(sub.lemma, "SUB")
       if verb_label != "?" and sub_label != "?":
         feature_dict["Abstractness_cross_SV_{}{}".format(sub_label, verb_label)] = 1
       feature_dict.update(sub_dict)
     feature_dict.update(verb_dict)
     if not obj.is_none:
-      obj_dict, obj_label = self._MakeFeatures(obj.word, "OBJ")
+      obj_dict, obj_label = self._MakeFeatures(obj.lemma, "OBJ")
       feature_dict.update(obj_dict)
       if verb_label != "?" and obj_label != "?":
         feature_dict["Abstractness_cross_OV_{}{}".format(obj_label, verb_label)] = 1
     if sub_label != "?" and verb_label == "?" and obj_label != "?":
       feature_dict["Abstractness_cross_SO_{}{}".format(sub_label, obj_label)] = 1
     return feature_dict
-   
-    
+
+
 if __name__ == '__main__':
   print "This module is a library, not supposed to be executed directly."
   sys.exit(1)

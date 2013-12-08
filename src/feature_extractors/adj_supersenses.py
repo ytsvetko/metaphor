@@ -38,7 +38,7 @@ class AdjSupersenses(feature_extractor.FeatureExtractor):
     feature_dict = {}
     if rel_type == 'an':
       if not adj.is_none:
-        feature_dict.update(self.vocab_predictions.get(adj.word, {}))
+        feature_dict.update(self.vocab_predictions.get(adj.lemma, {}))
     return feature_dict
    
 if __name__ == '__main__':

@@ -21,11 +21,11 @@ class VSM(generic_vspace.GenericVectorSpace):
       self, filename, line_num, line, rel_type, sub, verb, obj):
     feature_dict = {}
     if not sub.is_none:
-      feature_dict.update(self._WordToFeature(sub.word, 's'))
+      feature_dict.update(self._WordToFeature(sub.lemma, 's'))
     if not verb.is_none:
-      feature_dict.update(self._WordToFeature(verb.word, 'v'))
+      feature_dict.update(self._WordToFeature(verb.lemma, 'v'))
     if not obj.is_none:
-      feature_dict.update(self._WordToFeature(obj.word, 'o'))
+      feature_dict.update(self._WordToFeature(obj.lemma, 'o'))
     return feature_dict
    
 if __name__ == '__main__':

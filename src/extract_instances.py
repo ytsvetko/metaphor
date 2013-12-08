@@ -30,16 +30,16 @@ class TurboWord:
     self.is_none = (line.strip().lower() == "none")
     if not self.is_none:
       tokens = line.split()
-      self.word, self.surface_form, self.pos_tag, self.word_index = tokens[:4]
+      self.lemma, self.surface_form, self.pos_tag, self.word_index = tokens[:4]
       self.word_index = int(self.word_index)
     else:
       #self.word_index = 999
-      self.word, self.surface_form, self.pos_tag, self.word_index = (None, None, None, 999)
+      self.lemma, self.surface_form, self.pos_tag, self.word_index = (None, None, None, 999)
 
   def __unicode__(self):
     if self.is_none:
       return u"999_none_none"
-    return u"{}_{}_{}".format(self.word_index, self.word, self.surface_form)
+    return u"{}_{}_{}".format(self.word_index, self.lemma, self.surface_form)
 
 class InstanceExtractor:
   def __init__(self, feature_extractors, blacklisted_instances, features_file,

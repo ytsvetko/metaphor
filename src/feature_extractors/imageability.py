@@ -66,7 +66,7 @@ class ImageabilityFeatureExtractor(feature_extractor.FeatureExtractor):
     feature_dict = {}
     if rel_type == 'an':
       if not adj.is_none:
-        adj_dict, adj_label = self._MakeFeatures(adj.word, "ADJ")
+        adj_dict, adj_label = self._MakeFeatures(adj.lemma, "ADJ")
         feature_dict.update(adj_dict)
     return feature_dict
    

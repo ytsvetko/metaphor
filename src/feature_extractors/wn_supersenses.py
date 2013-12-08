@@ -49,11 +49,11 @@ class WordNetSupersenseFeatureExtractor(feature_extractor.FeatureExtractor):
     feature_dict = {}
     if rel_type = 'svo':
       if not sub.is_none:
-        feature_dict.update(self._WordToFeature(sub.word, "SUB", wn.NOUN))
+        feature_dict.update(self._WordToFeature(sub.lemma, "SUB", wn.NOUN))
       if not verb.is_none:
-        feature_dict.update(self._WordToFeature(verb.word, "VERB", wn.VERB))
+        feature_dict.update(self._WordToFeature(verb.lemma, "VERB", wn.VERB))
     if not obj.is_none:
-      feature_dict.update(self._WordToFeature(obj.word, "OBJ", wn.NOUN))
+      feature_dict.update(self._WordToFeature(obj.lemma, "OBJ", wn.NOUN))
     return feature_dict
    
     
