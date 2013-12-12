@@ -18,7 +18,7 @@ class VSM(generic_vspace.GenericVectorSpace):
         self, vectorSpaceUniqName, vectFileName, translation_dict)
 
   def ExtractFeaturesFromInstance(
-      self, filename, line_num, line, rel_type, sub, verb, obj):
+      self, filename, line_num, rel_type, sub, verb, obj):
     feature_dict = {}
     if not sub.is_none:
       feature_dict.update(self._WordToFeature(sub.lemma, 's'))

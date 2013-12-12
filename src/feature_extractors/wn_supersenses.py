@@ -5,7 +5,6 @@ import collections
 import codecs
 import sys
 import feature_extractor
-from nltk.corpus import wordnet as wn
 
 def REGISTER_ARGUMENTS(parser):
   parser.add_argument("--append_wn_supersenses", action="store_true",
@@ -20,8 +19,9 @@ CONCRETE_LEX_IDS = set(["noun.animal", "noun.artifact", "noun.body","noun.locati
 """
 
 class WordNetSupersenseFeatureExtractor(feature_extractor.FeatureExtractor):
-  def __init__(self, translation_dict=None):
+  def __init__(self, wn, translation_dict=None):
     self.translation_dict = translation_dict
+    self.wn = wn
 
   def _GetSupersensesByWord(self, word, ss_type):    
     if self.translation_dict is None:
@@ -30,7 +30,7 @@ class WordNetSupersenseFeatureExtractor(feature_extractor.FeatureExtractor):
       words = self.translation_dict.Get(word)
     counters = collections.Counter()
     for w in words:
-      for synset in wn.synsets(word, ss_type):
+      for synset in self.wn.synsets(word, ss_type):
         counters[synset.lexname] += 1
     return counters
 
@@ -43,15 +43,15 @@ class WordNetSupersenseFeatureExtractor(feature_extractor.FeatureExtractor):
     return result
 
   def ExtractFeaturesFromInstance(
-      self, filename, line_num, line, rel_type, sub, verb, obj):
+      self, filename, line_num, rel_type, sub, verb, obj):
     feature_dict = {}
     if rel_type == 'svo':
       if not sub.is_none:
-        feature_dict.update(self._WordToFeature(sub.lemma, "SUB", wn.NOUN))
+        feature_dict.update(self._WordToFeature(sub.lemma, "SUB", self.wn.NOUN))
       if not verb.is_none:
-        feature_dict.update(self._WordToFeature(verb.lemma, "VERB", wn.VERB))
+        feature_dict.update(self._WordToFeature(verb.lemma, "VERB", self.wn.VERB))
     if not obj.is_none:
-      feature_dict.update(self._WordToFeature(obj.lemma, "OBJ", wn.NOUN))
+      feature_dict.update(self._WordToFeature(obj.lemma, "OBJ", self.wn.NOUN))
     return feature_dict
    
     
@@ -62,5 +62,6 @@ if __name__ == '__main__':
 def REGISTER_FEATURE_EXTRACTOR(args, translation_dict=None):
   if not args.append_wn_supersenses:
     return None
-  return WordNetSupersenseFeatureExtractor(translation_dict)
+  from nltk.corpus import wordnet as wn
+  return WordNetSupersenseFeatureExtractor(wn, translation_dict)
   

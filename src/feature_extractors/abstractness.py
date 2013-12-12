@@ -62,7 +62,7 @@ class AbstractnessFeatureExtractor(feature_extractor.FeatureExtractor):
     return result, threshold_label
 
   def ExtractFeaturesFromInstance(
-      self, filename, line_num, line, rel_type, sub, verb, obj):
+      self, filename, line_num, rel_type, sub, verb, obj):
     feature_dict = {}
     verb_dict, verb_label = {}, "?"
     sub_dict, sub_label = {}, "?"

@@ -12,16 +12,11 @@ parser = feature_extractor.parser
 # Use one of those two parameters to specify the inputs
 parser.add_argument("--input_dir", help="Directory with input text files (output of parse_turbo_output.py)")
 parser.add_argument("--input_file", help="Filename with input text file (output of parse_turbo_output.py)")
-
-parser.add_argument("--features_filename", required=True,
-    help="Output file with features in creg format")
-parser.add_argument("--labels_filename", required=True,
-    help="Output file with labels in creg format")
-
-parser.add_argument("--blacklisted_instances",
-    help="File with instances that should not be processed")
-
+parser.add_argument("--features_filename", required=True, help="Output file with features in creg format")
+parser.add_argument("--labels_filename", required=True, help="Output file with labels in creg format")
+parser.add_argument("--blacklisted_instances", help="File with instances that should not be processed")
 parser.add_argument("--skip_subject_null_instances", default=False, action='store_true')
+
 args = feature_extractor.Repository.GetArgs()
 feature_extractors = feature_extractor.Repository.GetActiveFeatureExtractors()
 
@@ -66,7 +61,7 @@ class InstanceExtractor:
       self._ProcessLine(label, base_filename, line)
 
   def _ProcessLine(self, label, base_filename, line):
-    line_num, rel_type, instance_num, sub, verb, obj, orig_line = self._ParseLine(line)
+    line_num, rel_type, instance_num, sub, verb, obj = self._ParseLine(line)
     instance = "_".join( (base_filename, unicode(line_num), rel_type, unicode(instance_num),
         unicode(sub), unicode(verb), unicode(obj), label) )
     if args.skip_subject_null_instances and sub.is_none:
@@ -77,20 +72,20 @@ class InstanceExtractor:
     feature_dict = {}
     for extractor in self.feature_extractors:
       feature_dict.update(extractor.ExtractFeaturesFromInstance(
-          base_filename, line_num, orig_line, rel_type, sub, verb, obj))
+          base_filename, line_num, rel_type, sub, verb, obj))
     self._WriteFeatures(instance, feature_dict)
     self._WriteLabel(instance, label)
 
   def _ParseLine(self, line):
     line = line.lower()
-    line_num, rel_type, instance_num, sub, verb, obj, orig_line = line.strip().split("\t")
+    line_num, rel_type, instance_num, sub, verb, obj = line.strip().split("\t")
     assert rel_type in ['svo', 'an'], rel_type
     line_num = int(line_num)
     instance_num = int(instance_num)
     sub = TurboWord(sub)
     verb = TurboWord(verb)
     obj = TurboWord(obj)
-    return line_num, rel_type, instance_num, sub, verb, obj, orig_line
+    return line_num, rel_type, instance_num, sub, verb, obj
 
   def _WriteFeatures(self, instance, feature_dict):
     """Saves features in Creg format."""

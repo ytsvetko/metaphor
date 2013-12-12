@@ -17,7 +17,7 @@ class FeatureExtractor:
     pass
 
   def ExtractFeaturesFromInstance(
-      self, filename, line_num, line, rel_type, sub, verb, obj):
+      self, filename, line_num, rel_type, sub, verb, obj):
     """Returns:
          Python dictionary where keys are feature names and values are numeric
          feature values (use (0,1) for booleans or just floats or integers).

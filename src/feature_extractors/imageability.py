@@ -62,7 +62,7 @@ class ImageabilityFeatureExtractor(feature_extractor.FeatureExtractor):
     return result, threshold_label
 
   def ExtractFeaturesFromInstance(
-      self, filename, line_num, line, rel_type, adj, verb, obj):
+      self, filename, line_num, rel_type, adj, verb, obj):
     feature_dict = {}
     if rel_type == 'an':
       if not adj.is_none:

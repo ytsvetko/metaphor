@@ -26,8 +26,12 @@ class TurboWord:
     self.lemma = tokens[2].lower()
     self.pos_tag = tokens[3]
     if self.lemma in [u'-', u'_']:
-      # TODO: Support ADJ
-      lemmatizer_pos = 'v' if self.pos_tag.startswith("V") else "n"
+      if self.pos_tag.startswith("V"):
+        lemmatizer_pos = 'v'  
+      elif  self.pos_tag.startswith("N"): 
+        lemmatizer_pos = 'n'
+      else:
+        lemmatizer_pos = 'a' 
       self.lemma = lemmatizer.lemmatize(self.surface_form, lemmatizer_pos).lower()
     self.head = int(tokens[6])-1
     self.dep_rel = tokens[7]
@@ -54,11 +58,13 @@ class TurboSentence:
     word = TurboWord(line)
     self.words.append(word)
 
+  def FullSentence(self):
+    return u" ".join([w.surface_form for w in self.words])
+
   def Write(self, rel_type, sub, verb, obj=None):
-    full_sentence = u" ".join([w.surface_form for w in self.words])
     instance_num = -1
-    self.out_file.write(u"{}\t{}\t{}\t{}\t{}\t{}\t{}\n".format(
-        self.num_sentence, rel_type, instance_num, sub, verb, obj, full_sentence))
+    self.out_file.write(u"{}\t{}\t{}\t{}\t{}\t{}\n".format(
+        self.num_sentence, rel_type, instance_num, sub, verb, obj))
 
   def SaveSVO(self):
     sub_rel, obj_rel = self.GetSVO()
@@ -105,23 +111,17 @@ class TurboSentence:
     return sub_rel, obj_rel
 
   def SaveAN(self):
-    rel = []
     adjectives = [ x for x in self.words if x.dep_rel == u'NMOD' and x.pos_tag == u'JJ' ]
-    seen_an_objects = set()
     for adj in adjectives:
       if adj.surface_form.isalpha():
         id = adj.head
-        # There may be a chain of words between an adjective and the respective subject/object
+        # There may be a chain of words between an adjective and the respective noun
         # The loop would terminate, e.g., by reaching the dep_rel == u'ROOT'
         while self.words[id].dep_rel in [u'PMOD', u'NMOD']: 
           id = self.words[id].head
         noun = self.words[id]
-        # TODO: This is probably incorrect, we don't need to check for SUB or OBJ
-        if noun.dep_rel in [u'SUB', u'OBJ'] and noun.pos_tag == u'NN':
-          pair = (adj.id, noun.id)
-          if pair not in seen_an_objects:
-            self.Write(adj, None, noun)
-            seen_an_objects.add(pair)
+        if noun.pos_tag.startswith(u'NN') and adj.id < noun.id:
+          self.Write('an', adj, None, noun)
 
 def ParseTurboOutput(in_file, out_file, verb_filter, rel_type):
   num_sentence = 0
