@@ -16,9 +16,10 @@ OUTPUT_FILE=${OUTPUT_DIR}/`basename $INPUT_FILE`.metaphors
 
 
 #1. Run Turbo Parser on a text file split to sentences.
-
+echo "Parsing input"
 PARSED_INPUT_FILE=${WORK_DIR}/`basename $INPUT_FILE`.parsed
 if [ ! -f ${PARSED_INPUT_FILE} ]; then
+  echo "Parsing "$INPUT_FILE" with Turbo parser ..."
   ${TURBO_PARSER_DIR}/scripts/parse.sh $INPUT_FILE > ${PARSED_INPUT_FILE}
 fi
 
@@ -39,6 +40,7 @@ fi
 
 #3. Run each through feature extraction.
 #   Different parameters for each mode (SVO or AN).
+echo "Extracting features"
 if [ ${RUN_SVO} = 1 ] ; then
   SVO_FEATURES=${WORK_DIR}/`basename $INPUT_FILE`.svo_features
   ${BIN_DIR}/extract_instances.py --input_file ${SVO_CANDIDATES_FILE} \
@@ -63,7 +65,19 @@ fi
 
 
 # 4. Run classifier trained for each mode separately.
+echo "Running classifier"
+if [ ${RUN_SVO} = 1 ] ; then
+  MODEL=${ROOT_DIR}/models/svo.model
+  SVO_PREDICTED=${WORK_DIR}/`basename $INPUT_FILE`.svo_predicted
+  ${BIN_DIR}/classify.py --load_classifier_filename ${MODEL} \
+       --test_features ${SVO_FEATURES} \
+       --test_predicted_labels_out ${SVO_PREDICTED}
+fi
 
-#src/classify.py
-
-
+if [ ${RUN_AN} = 1 ] ; then
+  MODEL=${ROOT_DIR}/models/an.model
+  AN_PREDICTED=${WORK_DIR}/`basename $INPUT_FILE`.an_predicted
+  ${BIN_DIR}/classify.py --load_classifier_filename ${MODEL} \
+       --test_features ${AN_FEATURES} \
+       --test_predicted_labels_out ${AN_PREDICTED}
+fi

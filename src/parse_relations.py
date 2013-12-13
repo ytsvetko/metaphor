@@ -11,41 +11,53 @@ import argparse
 parser = argparse.ArgumentParser()
 
 parser.add_argument("--input_dir", help="Directory with relation files")
-parser.add_argument("--output_dir", help="Directory with results.")
+parser.add_argument("--out_dir", help="Directory with results.")
+
+parser.add_argument("--input_file", help="A file with relations")
+parser.add_argument("--out_file", help="Output file.")
+
 parser.add_argument("--rel_type", help="Relation types (SVO or NN).")
 
 args = parser.parse_args()
 
-def FormatWord(word, i, type):
-  return word + " " + word + " " + str(type) + " " + str(i)
+def FormatWord(word, pos, index):
+  return "{} {} {} {}".format(word, word, pos, index)
 
-def ProcessFileAN(in_filename, out_filename):
+def FormatAN(line, index):
+  tokens = line.split()
+  w1 = FormatWord(tokens[0], 'JJ', 1)
+  w2 = FormatWord(tokens[1], 'NN', 2)
+  return "{}\tan\t-1\t{}\tNone\t{}\n".format(index, w1, w2)
+
+def FormatSVO(line, index):
+  tokens = line.split()
+  w1 = FormatWord(tokens[0], 'NN', 1)
+  w2 = FormatWord(tokens[1], 'VB', 2)
+  if len(tokens) == 3:
+    w3 = FormatWord(tokens[2], 'NN', 3)
+  else: 
+    w3 = None
+  return "{}\tsvo\t-1\t{}\t{}\t{}\n".format(index, w1, w2, w3)
+
+def ProcessFile(in_filename, out_filename, rel_type):
   out_file = codecs.open(out_filename, "w", "utf-8")
   for index, line in enumerate(codecs.open(in_filename, "r", "utf-8")):
-    n1, n2 = line.strip().split()
-    out_file.write(str(index) + '\tan\t-1\t' +  FormatWord(n1, 1, 'JJ') + '\tNone\t' + FormatWord(n2, 2, 'NN')+'\n')
-
-def ProcessFileSVO(in_filename, out_filename):
-  out_file = codecs.open(out_filename, "w", "utf-8")
-  for index, line in enumerate(codecs.open(in_filename, "r", "utf-8")):
-    tokens = line.strip().split()
-    if len(tokens) != 3:
-      continue
-    n1, n2, n3 = tokens
-    out_file.write(str(index) + '\tsvo\t-1\t' +  FormatWord(n1, 1, 'NN') + '\t' + FormatWord(n2, 2, 'VB') + '\t' + FormatWord(n3,3, 'NN')+'\n')
+    if rel_type == "an": 
+      out_file.write(FormatAN(line, index))
+    else:
+      assert rel_type == 'svo', args.rel_type
+      out_file.write(FormatSVO(line, index))
 
 def main():
-  for filename in glob.iglob(os.path.join(args.input_dir, "*")):
-    basename = os.path.basename(filename)
-    out_filename = os.path.join(args.out_dir, basename)
-    if args.rel_type.lower() == 'an':
-      ProcessFileAN(filename, out_filename)
-    else:
-      assert args.rel_type.lower() == 'svo', args.rel_type
-      ProcessFileSVO(filename, out_filename)
- 
+  assert args.rel_type.lower() in ['svo', 'an']
+  if args.input_dir:
+    for filename in glob.iglob(os.path.join(args.input_dir, "*")):
+      basename = os.path.basename(filename)
+      out_filename = os.path.join(args.out_dir, basename)
+      ProcessFile(basename, out_filename, args.rel_type.lower())
+  elif args.input_file:
+    ProcessFile(args.input_file, args.out_file, args.rel_type.lower())
+
 if __name__ == '__main__':
   main()
-
-
 

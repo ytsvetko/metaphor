@@ -7,6 +7,7 @@ import sys
 import codecs
 import argparse
 import json
+import gzip
 from sklearn import svm
 from sklearn import cross_validation
 from sklearn import ensemble
@@ -218,7 +219,7 @@ class Classifier(object):
 
 def main():
   if args.load_classifier_filename:
-    with open(args.load_classifier_filename, "rb") as f:
+    with gzip.open(args.load_classifier_filename, "rb") as f:
       classifier = cPickle.load(f)
   else:
     classifier = Classifier()
@@ -248,7 +249,7 @@ def main():
 
     classifier.Train(X, y, priors)
   if args.dump_classifier_filename:
-    with open(args.dump_classifier_filename, "wb") as f:
+    with gzip.open(args.dump_classifier_filename, "wb") as f:
       cPickle.dump(classifier, f)
 
   # Testing

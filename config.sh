@@ -15,6 +15,8 @@ elif [ `uname -n` == "leo-Inspiron-1525" ] ; then
 else
   export TURBO_PARSER_DIR=${ROOT_DIR}/tools/TurboParser-2.1.0
   export AOT_PARSER_DIR=${ROOT_DIR}/tools/aot/seman/trunk
+
+# TODO export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:`pwd;`/deps/local/lib:"
 fi
 
 

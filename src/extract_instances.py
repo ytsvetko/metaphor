@@ -16,6 +16,7 @@ parser.add_argument("--features_filename", required=True, help="Output file with
 parser.add_argument("--labels_filename", required=True, help="Output file with labels in creg format")
 parser.add_argument("--blacklisted_instances", help="File with instances that should not be processed")
 parser.add_argument("--skip_subject_null_instances", default=False, action='store_true')
+parser.add_argument("--label", default="U", help="Training file label L or M")
 
 args = feature_extractor.Repository.GetArgs()
 feature_extractors = feature_extractor.Repository.GetActiveFeatureExtractors()
@@ -54,7 +55,7 @@ class InstanceExtractor:
   def ProcessSingleFile(self, filename):
     print """Extracts features from an input file using feature_extractors.""", filename
     base_filename = os.path.basename(filename)
-    label = "L" if base_filename == "literal.txt" or "nonmet" in base_filename or "nomet" in base_filename else "M"
+    label = args.label
     for extractor in self.feature_extractors:
       extractor.BeginNewFile(base_filename)
     for line in codecs.open(filename, "r", "utf-8"):
@@ -62,7 +63,7 @@ class InstanceExtractor:
 
   def _ProcessLine(self, label, base_filename, line):
     line_num, rel_type, instance_num, sub, verb, obj = self._ParseLine(line)
-    instance = "_".join( (base_filename, unicode(line_num), rel_type, unicode(instance_num),
+    instance = "_".join( (unicode(line_num), rel_type, unicode(instance_num),
         unicode(sub), unicode(verb), unicode(obj), label) )
     if args.skip_subject_null_instances and sub.is_none:
       return
