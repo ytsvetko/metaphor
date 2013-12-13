@@ -44,21 +44,20 @@ Usage
 
    *Examples:*
 
-   <p><code>
+
    ./train.sh svo input-text \
 
        resources/TroFi/metaphorical.txt \
 
        resources/TroFi/literal.txt
-   </code>
 
-   <p><code>
+
    ./train.sh an input-rel \
 
        resources/AdjN/training_adj_noun_met_en.txt \
 
        resources/AdjN/training_adj_noun_nonmet_en.txt
-  </code>
+
 
 ##### Prediction: 
    *Parameters:*
