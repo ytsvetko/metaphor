@@ -14,17 +14,17 @@ Installation
     Python 2.7
   </li> 
   <li>
-    Natural Language Toolkit nltk <p><a href="nltk.org">nltk.org</a></p>
+    Natural Language Toolkit nltk <a href="nltk.org">nltk.org</a>
   </li> 
   <li>
-    A Python module for machine learning scikit-learn <p><a href="scikit-learn.org">scikit-learn.org</a></p>
+    A Python module for machine learning scikit-learn <a href="scikit-learn.org">scikit-learn.org</a>
   </li> 
   <li>
-    English dependency parser TurboParser <p><a href="https://www.ark.cs.cmu.edu/TurboParser">https://www.ark.cs.cmu.edu/TurboParser</a></p>
+    English dependency parser TurboParser <a href="https://www.ark.cs.cmu.edu/TurboParser">https://www.ark.cs.cmu.edu/TurboParser</a>
   </li> 
   </ul>
   </blockquote>
-  See installation example in <p><code>install_dependencies.sh</code>
+  See installation example in <p><code>install_dependencies.sh</code></p>
 
 
 Usage
