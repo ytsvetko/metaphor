@@ -5,16 +5,16 @@
 # Tools
 if [ `uname -n` == "allegro.clab.cs.cmu.edu" ] ; then
   export TURBO_PARSER_DIR=/usr0/home/ytsvetko/tools/TurboParser-2.1.0
-  export AOT_PARSER_DIR=/usr0/home/ytsvetko/tools/aot/seman/trunk
+  export SEMAN_PARSER_DIR=/usr0/home/ytsvetko/tools/aot/seman/trunk
 elif [ `uname -n` == "ur.lti.cs.cmu.edu" ] ; then
   export TURBO_PARSER_DIR=/usr1/project/METAL/tools/TurboParser-2.0.1
-  export AOT_PARSER_DIR=/usr1/project/METAL/tools/AOTParser
+  export SEMAN_PARSER_DIR=/usr1/project/METAL/tools/AOTParser
 elif [ `uname -n` == "leo-Inspiron-1525" ] ; then
   export TURBO_PARSER_DIR=/home/leo/TurboParser-2.0.1
-  export AOT_PARSER_DIR=/home/leo/SourceTree/AOT/seman-svn/trunk
+  export SEMAN_PARSER_DIR=/home/leo/SourceTree/AOT/seman-svn/trunk
 else
   export TURBO_PARSER_DIR=${ROOT_DIR}/tools/TurboParser-2.1.0
-  export AOT_PARSER_DIR=${ROOT_DIR}/tools/aot/seman/trunk
+  export SEMAN_PARSER_DIR=${ROOT_DIR}/tools/aot/seman/trunk
   # TODO export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:`pwd;`/deps/local/lib:"
 fi
 

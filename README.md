@@ -22,6 +22,9 @@ Installation
   <li>
     English dependency parser TurboParser <a href="https://www.ark.cs.cmu.edu/TurboParser">https://www.ark.cs.cmu.edu/TurboParser</a>
   </li> 
+    <li>
+    Optionally: Russian dependency parser seman <a href="http://seman.sourceforge.net/">seman.sourceforge.net</a>
+  </li> 
   </ul>
   </blockquote>
   See installation example in <p><code>install_dependencies.sh</code></p>
