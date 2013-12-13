@@ -17,30 +17,19 @@ Usage
    *Parameters:*
 
       1. relation type (*svo* or *an*)
-
       2. format of the training files (*input-text* or *input-rel*)
-
       3. path to metaphoric training file
-
       4. path to literal training file
 
 
    *Examples:*
 
    <p><code>
-   ./train.sh svo input-text \
-
-        resources/TroFi/metaphorical.txt \
-
-        resources/TroFi/literal.txt
+   ./train.sh svo input-text  resources/TroFi/metaphorical.txt resources/TroFi/literal.txt
    </code>
 
    <p><code>
-   ./train.sh an input-rel \
-
-        resources/AdjN/training_adj_noun_met_en.txt \
-
-        resources/AdjN/training_adj_noun_nonmet_en.txt
+   ./train.sh an input-rel resources/AdjN/training_adj_noun_met_en.txt resources/AdjN/training_adj_noun_nonmet_en.txt
   </code>
 
 ##### Prediction: 
