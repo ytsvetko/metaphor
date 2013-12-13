@@ -67,17 +67,15 @@ fi
 # 4. Run classifier trained for each mode separately.
 echo "Running classifier"
 if [ ${RUN_SVO} = 1 ] ; then
-  MODEL=${ROOT_DIR}/models/svo.model
   SVO_PREDICTED=${WORK_DIR}/`basename $INPUT_FILE`.svo_predicted
-  ${BIN_DIR}/classify.py --load_classifier_filename ${MODEL} \
+  ${BIN_DIR}/classify.py --load_classifier_filename ${SVO_MODEL} \
        --test_features ${SVO_FEATURES} \
        --test_predicted_labels_out ${SVO_PREDICTED}
 fi
 
 if [ ${RUN_AN} = 1 ] ; then
-  MODEL=${ROOT_DIR}/models/an.model
   AN_PREDICTED=${WORK_DIR}/`basename $INPUT_FILE`.an_predicted
-  ${BIN_DIR}/classify.py --load_classifier_filename ${MODEL} \
+  ${BIN_DIR}/classify.py --load_classifier_filename ${AN_MODEL} \
        --test_features ${AN_FEATURES} \
        --test_predicted_labels_out ${AN_PREDICTED}
 fi

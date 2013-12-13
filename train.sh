@@ -10,7 +10,6 @@ MODE=$1
 INPUT_TYPE=$2
 TRAINNING_MET_FILE=$3
 TRAINNING_LIT_FILE=$4
-OUT_TRAINED_MODEL=$5
 
 WORK_DIR=${ROOT_DIR}/work/${MODE}
 mkdir -p ${WORK_DIR}
@@ -111,5 +110,10 @@ function TrainClassifier {
 }
 
 echo "Training models"
-TrainClassifier ${OUT_TRAINED_MODEL}/${MODE}.model
+if [ ${MODE} = "svo" ]; then
+  TrainClassifier ${SVO_MODEL}
+fi
+if [ ${MODE} = "an" ]; then
+  TrainClassifier ${AN_MODEL}
+fi
 

@@ -24,6 +24,10 @@ if [ ! ${ROOT_DIR} = "" ] ; then
   # Scripts
   export BIN_DIR=${ROOT_DIR}/src
 
+  # Trained models
+  AN_MODEL=${ROOT_DIR}/models/an.model
+  SVO_MODEL=${ROOT_DIR}/models/svo.model
+
   # Resources
   export RESOURCE_DIR=${ROOT_DIR}/resources
 
