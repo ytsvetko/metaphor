@@ -4,6 +4,17 @@
 export ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source ${ROOT_DIR}/config.sh
 
+
+if [ "$#" -ne 1 ] || ! [ -f "$1" ]; then
+  echo "Usage: $0 path_to_file" >&2
+  exit 1
+fi
+
+if [ ! -d "${TURBO_PARSER_DIR}" ] ; then 
+  echo "Usage Turbo Parser" >&2
+  exit 1  
+fi
+
 INPUT_FILE=$1
 
 WORK_DIR=${ROOT_DIR}/work

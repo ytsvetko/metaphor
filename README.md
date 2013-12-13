@@ -7,7 +7,7 @@ Cross-lingual metaphor detection.
 Installation
 -------
 
-  ./install_dependencies.sh
+  <p><code>./install_dependencies.sh</code>
 
 
 Usage
@@ -15,28 +15,44 @@ Usage
 
 ##### Training: 
    *Parameters:*
+
       1. relation type (*svo* or *an*)
+
       2. format of the training files (*input-text* or *input-rel*)
+
       3. path to metaphoric training file
+
       4. path to literal training file
 
+
    *Examples:*
+
+   <p><code>
    ./train.sh svo input-text \
+
         resources/TroFi/metaphorical.txt \
+
         resources/TroFi/literal.txt
+   </code>
 
+   <p><code>
    ./train.sh an input-rel \
-        resources/AdjN/training_adj_noun_met_en.txt \
-        resources/AdjN/training_adj_noun_nonmet_en.txt
 
+        resources/AdjN/training_adj_noun_met_en.txt \
+
+        resources/AdjN/training_adj_noun_nonmet_en.txt
+  </code>
 
 ##### Prediction: 
    *Parameters:*
+
       1. path to input file split to sentences
 
    *Examples:*
-   ./find_metaphors.sh path_to_file
-                       
+
+   <p><code>
+   ./find_metaphors.sh path_to_file                       
+   </code>
 
  
 

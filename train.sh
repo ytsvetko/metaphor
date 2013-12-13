@@ -4,6 +4,20 @@
 export ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source ${ROOT_DIR}/config.sh
 
+if [ "$#" -ne 4 ] || ! [ -f "$3" ] || ! [ -f "$4" ]; then
+  echo "Parameters:" >&2
+  echo "    1. relation type (svo or an)" >&2
+  echo "    2. format of the training files (input-text or input-rel)" >&2
+  echo "    3. path to metaphoric training file" >&2
+  echo "    4. path to literal training file" >&2
+  echo "" >&2
+  echo "Examples:" >&2
+  echo "  $0 svo input-text resources/TroFi/metaphorical.txt resources/TroFi/literal.txt" >&2
+  echo "  $0 an input-rel resources/AdjN/training_adj_noun_met_en.txt resources/AdjN/training_adj_noun_nonmet_en.txt" >&2
+  exit 1
+fi
+
+
 # Train model for SVO or AdjN relations
 # Input - training corpus
 MODE=$1

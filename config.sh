@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Export paths for various tools and resources specific to the project
+# Export paths for various tools, resources, and variables specific to the project
 
 # Tools
 if [ `uname -n` == "allegro.clab.cs.cmu.edu" ] ; then
@@ -15,10 +15,8 @@ elif [ `uname -n` == "leo-Inspiron-1525" ] ; then
 else
   export TURBO_PARSER_DIR=${ROOT_DIR}/tools/TurboParser-2.1.0
   export AOT_PARSER_DIR=${ROOT_DIR}/tools/aot/seman/trunk
-
-# TODO export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:`pwd;`/deps/local/lib:"
+  # TODO export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:`pwd;`/deps/local/lib:"
 fi
-
 
 if [ ! ${ROOT_DIR} = "" ] ; then 
   # Scripts
