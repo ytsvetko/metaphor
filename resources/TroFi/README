@@ -1,0 +1,14 @@
+We train the Subject-Verb-Object metaphor detection pipeline on the 
+TroFi (Trope Finder) dataset (Birke and Sarkar, 2006) 
+--http://natlang.cs.sfu.ca/software/trofi.html-- 
+which includes 3,737 manually annotated English sentences 
+from the  Wall Street Journal. Each sentence has an example of either 
+literal or metaphorical use for one of the 50 English verbs. 
+
+
+Julia Birke and Anoop Sarkar. Clustering Approach for the Nearly 
+Unsupervised Recognition of Nonliteral Language  
+In Proceedings of the 11th Conference of the 
+European Chapter of the Association for Computational Linguistics, EACL-2006. 
+Trento, Italy. April 3-7, 2006.
+

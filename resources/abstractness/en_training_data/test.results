@@ -1,0 +1,11 @@
+Num of labels: 2
+Num training samples: 2333
+Num of features: 64
+Training
+Testing
+Confusion Matrix:
+Correct\Predicted
+	A	C
+A	 21	  3
+C	  0	 25
+Held-out accuracy: 0.938775510204

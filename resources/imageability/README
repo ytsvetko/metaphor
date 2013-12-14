@@ -1,0 +1,35 @@
+Imageability predictions for English adjectives:
+  en/imageability.predictions
+
+Imageability predictions for Russian words 
+(projected from English using a bilingual dictonary):
+  ru/imageability.predictions
+
+
+The MRC psycholinguistic database --http://ota.oucs.ox.ac.uk/headers/1054.xml-- 
+is a large dictionary listing linguistic and psycholinguistic attributes 
+obtained experimentally (Wilson,1988). It includes, among other data, 
+4,295 words rated by the degrees of abstractness and 1156 words rated by the 
+imageability.
+ 
+We use a supervised learning algorithm to propagate abstractness 
+and imageability scores to all words for which we have vector space 
+representations. We calculate the degree of abstractness and imageability 
+of English words  using vector elements as features. 
+Abstractness and imageability rankings from the MRC database are used as 
+a training set (at en_training_data/*).
+Propagated degrees of abstractness and imageability are 
+posterior probabilities of classifier predictions. 
+Classifier output is at en/abstractness.predictions
+
+We binarize these posteriors into abstract-concrete (or imageable-unimageable) 
+boolean indicators using pre-defined thresholds.
+Thresholds are equal to 0.8 for abstractness and to 0.9 for imageability, 
+they were chosen empirically based on accuracy during cross-validation. 
+Performance of these classifiers, tested on a sampled held-out data, 
+is 0.94 and 0.85 for the abstractness and imageability classifiers, respectively.
+
+
+Michael Wilson. 1988. MRC Psycholinguistic Database: 
+Machine-usable dictionary, version 2.00. 
+Behavior Research Methods, Instruments, & Computers, 20(1):6–10.

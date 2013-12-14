@@ -1,0 +1,19 @@
+Supersenses are coarse semantic categories originating in WordNet. 
+For nouns and verbs there are 45 classes: 26 for nouns and 15 for verbs, 
+for example, noun.body, noun.animal, verb.consumption, or verb.motion.
+
+wn_noun.supersneses and wn_noun.supersneses files contain 
+feature vectors for WordNet nouns and verbs. 
+A word can belong to several synsets, which are associated with 
+different supersenses. Degrees of membership in different 
+supersenses are represented by feature vectors, where each element 
+corresponds to one supersense. For example, the word head (when used as a noun) 
+participates in 33 synsets, three of which are related to the 
+supersense noun.body. The value of the feature corresponding to this 
+supersense is 3/33 ≈ 0.09
+
+
+English adjectives do not, as yet, have a similar high-level 
+semantic partitioning, so we created one (forthcoming, LREC): wn_adj.supersneses.  
+
+
