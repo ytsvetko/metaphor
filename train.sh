@@ -27,7 +27,6 @@ TRAINNING_LIT_FILE=$4
 
 WORK_DIR=${ROOT_DIR}/work/${MODE}
 mkdir -p ${WORK_DIR}
-mkdir -p ${OUT_TRAINED_MODEL}
 
 function TurboParse {
   in_file=$1
