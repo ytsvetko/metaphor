@@ -20,8 +20,14 @@ parser.add_argument("--train_features")
 parser.add_argument("--train_labels")
 
 parser.add_argument("--priors", default="{}",
-    help="A dictionary of {'Label':prior, ... } or a string 'balanced'. " +
+    help="Training-time multipliers for label weights. " +
+         "A dictionary of {'Label':prior, ... } or a string 'balanced'. " +
          "Asumes a prior of 1.0 for unspecified labels.")
+
+parser.add_argument("--label_weights", default="{}",
+    help="Testing-time multipliers for label weights. " +
+         "A dictionary of {'Label':weight, ... }. " +
+         "Asumes a weight of 1.0 for unspecified labels.")
 
 parser.add_argument("--test_features")
 parser.add_argument("--test_predicted_labels_out")
@@ -85,9 +91,16 @@ class Classifier(object):
     label_weights = np.array([priors.get(self.labels_enum.NumToStr(l), 1.0) for l in y])
     self.classifier.fit(X, y, label_weights)
 
-  def Predict(self, Xsparse):
+  def Predict(self, Xsparse, label_weights):
     X = self.FromSparse(Xsparse)
-    return self.classifier.predict(X), self.classifier.predict_proba(X)
+    posteriors = []
+    predictions = []
+    for prob_array in self.classifier.predict_proba(X):
+      prob_array *= label_weights
+      prob_array /= prob_array.sum()  # Normalize
+      posteriors.append(prob_array)
+      predictions.append(prob_array.argmax())
+    return predictions, posteriors
 
   def LoadCregFeatFile(self, feat_filename, create_new_features=True):
     Xsparse = []
@@ -182,10 +195,11 @@ class Classifier(object):
         except ValueError:
           pass  # Did not see this label in training.
       normalized_hist = NormalizedHistogram(hist)
-      print normalized_hist
       accuracy = normalized_hist[0]
+      print accuracy
       return accuracy
 
+    print "Running {}-fold cross validation".format(num_folds)
     accuracy = []
     X = np.array(self.FromSparse(Xsparse))
     for train, test in cross_validation.StratifiedKFold(y, num_folds):
@@ -234,12 +248,16 @@ def main():
     print "Num of labels:", len(classifier.labels_enum.labels)
     print "Num training samples:", len(y)
     print "Num of features:", len(classifier.features_enum.labels)
+    balanced_priors = classifier.CalculateBalancedPriors(y)
+    print "Balanced label weights:", balanced_priors
 
     if args.priors == "balanced":
-      priors = classifier.CalculateBalancedPriors(y)
-      print "Using balanced priors:", priors
+      priors = balanced_priors
+      print "Using balanced label weights as priors."
     else:
-      priors = json.loads(args.priors)
+      priors = eval(args.priors)
+      print "Using priors:", priors
+      print "To train using the balanced label weights use --priors='balanced'"
 
     print("Training")
     if args.num_cross_validation_folds > 0:
@@ -257,9 +275,14 @@ def main():
     return
 
   print("Testing")
+  label_weights_sparse = eval(args.label_weights)
+  label_weights = []
+  for i in xrange(len(classifier.labels_enum)):
+    label_weights.append(label_weights_sparse.get(classifier.labels_enum.NumToStr(i), 1.0))
+  label_weights = np.array(label_weights)
   X_test, test_instances = classifier.LoadCregFeatFile(args.test_features, create_new_features=False)
 
-  test_predicted_labels, test_predicted_probabilities = classifier.Predict(X_test)
+  test_predicted_labels, test_predicted_probabilities = classifier.Predict(X_test, label_weights)
   if args.test_predicted_labels_out:
     out_probabilities = test_predicted_probabilities
     if not args.write_posterior_probabilities:
