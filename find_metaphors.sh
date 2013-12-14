@@ -11,7 +11,7 @@ if [ "$#" -ne 1 ] || ! [ -f "$1" ]; then
 fi
 
 if [ ! -d "${TURBO_PARSER_DIR}" ] ; then 
-  echo "Usage Turbo Parser" >&2
+  echo "Please, update a path to Turbo Parser -- TURBO_PARSER_DIR variable in config.sh " >&2
   exit 1  
 fi
 
@@ -90,3 +90,13 @@ if [ ${RUN_AN} = 1 ] ; then
        --test_features ${AN_FEATURES} \
        --test_predicted_labels_out ${AN_PREDICTED}
 fi
+
+echo "Writing output to "${OUTPUT_FILE}
+echo "Output format: sentence \t label (M or L) \t labeled metaphor candidates in json format"
+${BIN_DIR}/format_output.py --input_file ${INPUT_FILE} \
+       --predicted_an_label ${AN_PREDICTED} \
+       --predicted_svo_label ${SVO_PREDICTED} \
+       --filter_files_dir ${FILTER_FILES_DIR} \
+       --out_file ${OUTPUT_FILE}
+
+

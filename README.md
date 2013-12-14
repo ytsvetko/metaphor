@@ -7,7 +7,7 @@ Cross-lingual metaphor detection.
 Installation
 -------
   
-  This tool requires:
+  This tool requires the following dependencies:
   <blockquote>
   <ul>
   <li>
@@ -27,13 +27,15 @@ Installation
   </li> 
   </ul>
   </blockquote>
-  See installing the dependencies example in <p><code>install_dependencies.sh</code></p>
+  See installing the dependencies example in <pre><code>install_dependencies.sh</code></pre>
 
 
 Usage
 -------
 
 ##### Training: 
+
+
    *Parameters:*
 
       1. relation type (*svo* or *an*)
@@ -44,29 +46,32 @@ Usage
 
    *Examples:*
 
-
-   ./train.sh svo input-text \
-
-       resources/TroFi/metaphorical.txt \
-
-       resources/TroFi/literal.txt
+   <pre><code>
+   ./train.sh svo input-text \ <br />  resources/TroFi/metaphorical.txt \ <br />  resources/TroFi/literal.txt
+   </code></pre>
 
 
-   ./train.sh an input-rel \
-
-       resources/AdjN/training_adj_noun_met_en.txt \
-
-       resources/AdjN/training_adj_noun_nonmet_en.txt
+    <pre><code>
+  ./train.sh an input-rel \ <br />  resources/AdjN/training_adj_noun_met_en.txt \ <br />  resources/AdjN/training_adj_noun_nonmet_en.txt
+   </code></pre>
 
 
 ##### Prediction: 
+
+
    *Parameters:*
 
       1. path to input file split to sentences
 
    *Examples:*
 
-   <p><code>
+   <pre><code>
    ./find_metaphors.sh path_to_file                       
-   </code>
+   </code></pre>
+
+   *Output format:*
+
+   <pre><code>
+    sentence \t label (*M* or *L*) \t labeled metaphor candidates in json format"
+   </code></pre>
 
