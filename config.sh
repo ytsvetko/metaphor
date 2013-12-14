@@ -51,6 +51,8 @@ export RUN_NN=0
 
 export ABSTRACTNESS_THRESHOLD=0.8
 export IMAGEABILITY_THRESHOLD=0.9
+export SVO_LABEL_WEIGHTS="{'L': 0.58, 'M': 0.42}"
+export AN_LABEL_WEIGHTS="{'L': 1.0, 'M': 1.0}"
 
 # Data parameters to the extract_instances.py.
 EXTRACT_FEATURES_PARAMS=""

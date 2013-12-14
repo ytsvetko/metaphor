@@ -79,7 +79,7 @@ Usage
    Tab-separated text file sentence-aligned to the input file with the following fields:
 
     1. the original sentence
-    2. sentence label "M" or "L"
+    2. predicted sentence label "M" or "L"
     3. json-formatted metaphor candidates with labels
 
    *Example:*

@@ -81,18 +81,22 @@ if [ ${RUN_SVO} = 1 ] ; then
   SVO_PREDICTED=${WORK_DIR}/`basename $INPUT_FILE`.svo_predicted
   ${BIN_DIR}/classify.py --load_classifier_filename ${SVO_MODEL} \
        --test_features ${SVO_FEATURES} \
-       --test_predicted_labels_out ${SVO_PREDICTED}
+       --test_predicted_labels_out ${SVO_PREDICTED} \
+       --write_posterior_probabilities \
+       --label_weights "${SVO_LABEL_WEIGHTS}"
 fi
 
 if [ ${RUN_AN} = 1 ] ; then
   AN_PREDICTED=${WORK_DIR}/`basename $INPUT_FILE`.an_predicted
   ${BIN_DIR}/classify.py --load_classifier_filename ${AN_MODEL} \
        --test_features ${AN_FEATURES} \
-       --test_predicted_labels_out ${AN_PREDICTED}
+       --test_predicted_labels_out ${AN_PREDICTED} \
+       --write_posterior_probabilities \
+       --label_weights "${AN_LABEL_WEIGHTS}"
 fi
 
 echo "Writing output to "${OUTPUT_FILE}
-echo "Output format: sentence \t label (M or L) \t labeled metaphor candidates in json format"
+echo "Output format: sentence <tab> label (M or L) <tab> labeled metaphor candidates in json format"
 ${BIN_DIR}/format_output.py --input_file ${INPUT_FILE} \
        --predicted_an_label ${AN_PREDICTED} \
        --predicted_svo_label ${SVO_PREDICTED} \
