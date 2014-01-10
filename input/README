@@ -1,0 +1,36 @@
+Adjective-Noun and Subject-Verb-Object 
+metaphorical and literal test sets used in the paper 
+
+Metaphor Detection with Cross-Lingual Model Transfer (forthcoming)
+
+
+We used the following procedure to compile the English and \Russian test sets. 
+A moderator started with seed lists of 1000 most common verbs and adjectives
+Then she used the SketchEngine, which provides searching capability for the TenTen Web corpus, 
+(http://trac.sketchengine.co.uk/wiki/Corpora/enTenTen)  
+to extract sentences with words that frequently co-occurred with words from the seed lists.
+From these sentences, she removed sentences that contained more than one metaphor, 
+and sentences with non-SVO and non-AN metaphors. 
+Remaining sentences were annotated by several native speakers (five for English and six for Russian),
+who judged AN and SVO phrases in context. The annotation instructions were general: 
+``Please, mark in bold all words that, in your opinion, are used non-literally in the following sentences.  In many sentences, all the words may be used literally.''
+
+The Fleiss' Kappas for 5 English and 6 Russian annotators are:
+English-AN = .76
+Russian-AN = .85 
+English-SVO = .75 
+Russian-SVO = .78 
+For the final selection, we filtered out low-agreement (<.8) sentences.
+
+The test candidate sentences were selected by a person who did not participate 
+in the selection of the training samples. 
+No English annotators of the test set, and only one Russian annotator 
+out of 6 participated in the selection of the training samples. 
+Thus, we trust that annotator judgments were not biased towards the cases 
+that the system is trained to process. 
+
+
+English and Russian datasets along with annotator judgments:
+Datasets_ACL2014.xlsx
+
+
