@@ -1,7 +1,16 @@
-Word vectors created by Faruqui & Dyer (forthcoming) are a variation on 
+Word vectors created by Faruqui & Dyer (2014) are a variation on 
 traditional latent semantic analysis that uses multilingual information 
 to produce representations in which synonymous words have similar vectors.
 
 Uncompress before running the tool:
 
 tar -zxvf en-svd-de-64.txt.tar.gz
+
+
+
+
+Manaal Faruqui and Chris Dyer. 2014. 
+Improving vector space word representations using multilingual correlation. 
+In Proceedings of the 14th Conference of the European Chapter of the 
+Association for Computational Linguistics,
+EACL ’14. Association for Computational Linguistics.
