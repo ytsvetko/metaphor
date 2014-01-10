@@ -39,10 +39,12 @@ Installation
   </blockquote>
   The following script demonstrates commands needed for installing the dependencies: ```install_dependencies.sh```
 
+
 Example
 -------
-To see usage example run the script 
+For usage example run the script 
 ```example.sh```
+
 
 Usage
 -------
