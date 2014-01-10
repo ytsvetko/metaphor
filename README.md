@@ -42,16 +42,12 @@ Installation
 
 Example
 -------
-For usage example run the script:
-
-```example.sh```
-
+For usage example run the script: ```example.sh```
 
 
 
 Usage
 -------
-
 ##### Training: 
 
 
@@ -121,7 +117,7 @@ Usage
     2. predicted sentence label "M" or "L"
     3. json-formatted metaphor candidates with labels
 
-   *Example:*
+   *Output example:*
 
 ```
 Care to offer some evidence that this bald assertion is true? <tab> M <tab> {"bald assertion": "M", "offer evidence": "M"}
