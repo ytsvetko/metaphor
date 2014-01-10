@@ -42,7 +42,8 @@ Installation
 
 Example
 -------
-For usage example run the script 
+For usage example run the script:
+
 ```example.sh```
 
 
