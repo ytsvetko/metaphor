@@ -70,7 +70,7 @@ def main():
   for line_num, line in enumerate(codecs.open(args.input_file, "r", "utf-8")):
     label, sentence_predictions = GetPredictions(line_num, 
           line, an_predictions, svo_predictions)
-    out_file.write("{}\t{}\t{}\n".format(line.strip(), label, json.dumps(sentence_predictions)))
+    out_file.write(u"{}\t{}\t{}\n".format(line.strip(), label, json.dumps(sentence_predictions)))
 
 if __name__ == '__main__':
   main()

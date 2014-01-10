@@ -21,13 +21,13 @@ parser.add_argument("--rel_type", help="Relation types (SVO or NN).")
 args = parser.parse_args()
 
 def FormatWord(word, pos, index):
-  return "{} {} {} {}".format(word, word, pos, index)
+  return u"{} {} {} {}".format(word, word, pos, index)
 
 def FormatAN(line, index):
   tokens = line.split()
   w1 = FormatWord(tokens[0], 'JJ', 1)
   w2 = FormatWord(tokens[1], 'NN', 2)
-  return "{}\tan\t-1\t{}\tNone\t{}\n".format(index, w1, w2)
+  return u"{}\tan\t-1\t{}\tNone\t{}\n".format(index, w1, w2)
 
 def FormatSVO(line, index):
   tokens = line.split()
@@ -37,7 +37,7 @@ def FormatSVO(line, index):
     w3 = FormatWord(tokens[2], 'NN', 3)
   else: 
     w3 = None
-  return "{}\tsvo\t-1\t{}\t{}\t{}\n".format(index, w1, w2, w3)
+  return u"{}\tsvo\t-1\t{}\t{}\t{}\n".format(index, w1, w2, w3)
 
 def ProcessFile(in_filename, out_filename, rel_type):
   out_file = codecs.open(out_filename, "w", "utf-8")
