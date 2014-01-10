@@ -1,3 +1,13 @@
 Adjective-Noun metaphors used for model training in the paper 
 
-Metaphor Detection in Low-Resource Languages (forthcoming)
+Metaphor Detection with Cross-Lingual Model Transfer (forthcoming)
+
+
+We construct and make publicly available a training set containing 
+884 metaphorical AN pairs and 884 pairs with literal meaning. 
+It was collected by two annotators using public resources 
+(collections of metaphors on the web).
+At least one additional person carefully examined and culled 
+the collected metaphors, by removing duplicates, weak metaphors, 
+and metaphorical phrases (such as drowning students) whose interpretation 
+depends on the context. 
