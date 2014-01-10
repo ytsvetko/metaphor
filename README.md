@@ -46,6 +46,8 @@ For usage example run the script
 ```example.sh```
 
 
+
+
 Usage
 -------
 
@@ -123,8 +125,12 @@ Usage
 ```
 Care to offer some evidence that this bald assertion is true? <tab> M <tab> {"bald assertion": "M", "offer evidence": "M"}
 ```
-##### Released resources:
 
+
+
+
+Released resources:
+-------
   <blockquote>
   <ul>
   <li>
