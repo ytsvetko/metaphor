@@ -4,10 +4,11 @@ metaphor
 Cross-lingual metaphor detection.
 
 
-This tool is a partial implementation of the ACL'14 submission:
+This tool is a partial implementation of the ACL'14 paper:
 
-Metaphor Detection with Cross-Lingual Model Transfer
-
+<a href="http://aclanthology.info/papers/metaphor-detection-with-cross-lingual-model-transfer">Metaphor Detection with Cross-Lingual Model Transfer</a>
+  </li> 
+  
 
 Installation
 -------
