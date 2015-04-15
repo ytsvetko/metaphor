@@ -23,10 +23,10 @@ Installation
     Natural Language Toolkit nltk <a href="http://nltk.org">nltk.org</a>
   </li> 
   <li>
-    A Python module for machine learning scikit-learn <a href="http://scikit-learn.org">scikit-learn.org</a>
+    A Python module for machine learning scikit-learn version 0.13 <a href="http://scikit-learn.org">scikit-learn.org</a> 
   </li> 
   <li>
-    English dependency parser TurboParser <a href="https://www.ark.cs.cmu.edu/TurboParser">www.ark.cs.cmu.edu/TurboParser</a>
+    English dependency parser TurboParser version 2.1.0 <a href="https://www.ark.cs.cmu.edu/TurboParser">www.ark.cs.cmu.edu/TurboParser</a>
   </li> 
     <li>
     Optionally: Russian dependency parser seman <a href="http://seman.sourceforge.net/">seman.sourceforge.net</a>
@@ -38,8 +38,24 @@ Installation
   </li> 
   </ul>
   </blockquote>
-  The following script demonstrates commands needed for installing the dependencies: ```install_dependencies.sh```
-
+  
+    The following script demonstrates commands needed for installing the dependencies: ```install_dependencies.sh```
+  <blockquote>
+  <ul>
+  Update from Apr 15, 2015:
+  The new versions of scikit-learn are not backward compatible, and the tool breaks. To run the tool install older versions of scikit-learn, scipy and numpy in an virtual environment like this: (big thanks to Lingpeng Kong for figuring this out!) 
+  1) install virtualenv: sudo apt-get install python-virtualenv
+  2) create a virualenv and install there older versions: 
+    virtualenv old_env
+    source old_env/bin/activate
+    pip install nltk
+    export NLTK_DATA="where you have the nltk_data, if not use nltk.download() to get them"
+    pip install nose==1.3.6
+    pip install numpy==1.8.1
+    pip install scipy==0.12.1
+    pip install scikit-learn==0.13
+  </ul>
+  </blockquote>
 
 Example
 -------
