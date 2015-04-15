@@ -32,9 +32,9 @@ Installation
     Optionally: Russian dependency parser seman <a href="http://seman.sourceforge.net/">seman.sourceforge.net</a>
   </li> 
   <li>
-    Important: Uncompress resources/VSM.en-svd-de-64.txt.tar.gz file before running the tool
+    Important: Uncompress resources/VSM/en-svd-de-64.txt.tar.gz file before running the tool
     
-    tar -zxvf en-svd-de-64.txt.tar.gz
+    tar -zxvf resources/VSM/en-svd-de-64.txt.tar.gz
   </li> 
   </ul>
   </blockquote>
