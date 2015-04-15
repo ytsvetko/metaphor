@@ -46,11 +46,14 @@ Installation
   Update from Apr 15, 2015:
   The new versions of scikit-learn are not backward compatible, and the tool breaks. To run the tool install older versions of scikit-learn, scipy and numpy in an virtual environment like this: (big thanks to Lingpeng Kong for figuring this out!) 
 
-  1. install virtualenv: sudo apt-get install python-virtualenv
-  2. create a virualenv and install there older versions: 
+  1. Install virtualenv: sudo apt-get install python-virtualenv
+  2. Create a virualenv and install there older versions (see below)
+  3. Whenever you run the tool activate the virtualenv like this: ```source metaphor_env/bin/activate```
   
-   virtualenv old_env
-   source old_env/bin/activate
+ virtualenv metaphor_env
+
+ source metaphor_env/bin/activate
+ 
  pip install nltk
 
  export NLTK_DATA="where you have the nltk_data, if not use nltk.download() to get them"
