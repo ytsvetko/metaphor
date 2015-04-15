@@ -34,7 +34,7 @@ Installation
   <li>
     Important: Uncompress resources/VSM/en-svd-de-64.txt.tar.gz file before running the tool
     
-    tar -zxvf resources/VSM/en-svd-de-64.txt.tar.gz
+    tar -zxvf en-svd-de-64.txt.tar.gz
   </li> 
   </ul>
   </blockquote>
